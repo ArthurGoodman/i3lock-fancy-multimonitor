@@ -27,7 +27,7 @@ do
     ;;
   -b=*|--blur=*)
     VAL="${i#*=}"
-    BLURTYPE=(${VAL//=/ }) 
+    BLURTYPE=(${VAL//=/ })
     shift
     ;;
   -n|--no-text)
@@ -99,6 +99,9 @@ eval convert $PARAMS
 
 #Pause dunst
 killall -SIGUSR1 dunst
+
+#Turn the screen off after a delay
+bash -c "sleep 60; pgrep i3lock && xset dpms force off" &
 
 #Lock the screen:
 i3lock --nofork -i $OUTPUT_IMAGE -t
